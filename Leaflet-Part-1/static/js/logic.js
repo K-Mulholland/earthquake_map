@@ -55,7 +55,7 @@ L.control.layers(baseMaps, overlayMaps, {
 
 
 // Perform an API call to the Citi Bike API to get the station information. Call createMarkers when it completes.
-d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson").then(function(data){
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson").then(function(data){
 
 //function for style
 function style(feature){
@@ -68,18 +68,18 @@ function style(feature){
 //function for color
 function color(magnitude){
   if (magnitude>5){
-    return "red";
+    return "#375700";
   }
   if (magnitude>4){
-    return "re";
+    return "#487000";
   }  if (magnitude>3){
-    return "re";
+    return "#5e9400";
   }  if (magnitude>2){
-    return "re";
+    return "#7fc700";
   }  if (magnitude>1){
-    return "re";
+    return "#a8ff0f";
   }
-  return "#98ee00";
+  return "#273d00";
 }
 // function for radius
 function radius(magnitude){
@@ -114,7 +114,7 @@ legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [0, 1, 2, 3, 4, 5],
-        labels = ["#98ee00","#98ee00","#98ee00","#98ee00","#98ee00","#98ee00"];
+        labels = ["#a8ff0f","#7fc700","#5e9400","#487000","#375700","#273d00"];
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {

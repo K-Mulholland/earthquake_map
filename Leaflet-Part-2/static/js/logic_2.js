@@ -60,7 +60,7 @@ L.control.layers(baseMaps, overlayMaps, {
 
 
 // Perform an API call to the Citi Bike API to get the station information. Call createMarkers when it completes.
-d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson").then(function(data){
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson").then(function(data){
 
 //function for style
 function style(feature){
@@ -72,20 +72,19 @@ function style(feature){
 
 //function for color
 function color(depth){
-  if (depth>90){
-    return "red";
+  if (magnitude>90){
+    return "#375700";
   }
-  if (depth>70){
-    return "re";
-  }  if (depth>50){
-    return "re";
-  }  if (depth>30){
-    return "re";
-  }  if (depth>10){
-    return "";
+  if (magnitude> -10){
+    return "#487000";
+  }  if (magnitude>10){
+    return "#5e9400";
+  }  if (magnitude>30){
+    return "#7fc700";
+  }  if (magnitude>50){
+    return "#a8ff0f";
   }
-  return "#98ee00";
-}
+  return "#273d00";
 // function for radius
 function radius(magnitude){
   if (magnitude===0){
@@ -122,12 +121,12 @@ legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [-10, 10, 30, 50, 70, 90],
-        labels = ["#98ee00","#98ee00","#98ee00","#98ee00","#98ee00","#98ee00"];
+        colors = ["#a8ff0f","#7fc700","#5e9400","#487000","#375700","#273d00"];
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + labels[i] + '"></i> ' +
+            '<i style="background:' + colors[i] + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
 
@@ -136,9 +135,9 @@ legend.onAdd = function (map) {
 
 legend.addTo(map);
 
-d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data){
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson").then(function(data){
   L.geoJson(data, {
-    color: "red"
+    color: "#0800fc"
   }).addTo(tectonic_plates);
   tectonic_plates.addTo(map);
 });
