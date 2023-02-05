@@ -70,21 +70,18 @@ function style(feature){
   };
 }
 
+
 //function for color
 function color(depth){
-  if (magnitude>90){
-    return "#375700";
-  }
-  if (magnitude> -10){
-    return "#487000";
-  }  if (magnitude>10){
-    return "#5e9400";
-  }  if (magnitude>30){
-    return "#7fc700";
-  }  if (magnitude>50){
-    return "#a8ff0f";
-  }
-  return "#273d00";
+  if (magnitude>90) return "#375700";
+  else if (magnitude> -10) return "#487000";
+  else if (magnitude>10) return "#5e9400";
+  else if (magnitude>30) return "#7fc700";
+  else if (magnitude>50) return "#a8ff0f";
+  else return "#273d00";
+}
+
+
 // function for radius
 function radius(magnitude){
   if (magnitude===0){
@@ -132,6 +129,10 @@ legend.onAdd = function (map) {
 
     return div;
 };
+
+
+
+
 
 legend.addTo(map);
 
