@@ -34,32 +34,9 @@ L.control.layers(baseMaps, overlayMaps, {
 }).addTo(map);
 // }
 
-// function createMarkers(response) {
-
-//   // Pull the "stations" property from response.data.
-//   var stations = response.data.stations;
-
-//   // Initialize an array to hold bike markers.
-//   var bikeMarkers = [];
-
-//   // Loop through the stations array.
-//   for (var index = 0; index < stations.length; index++) {
-//     var station = stations[index];
-
-//     // For each station, create a marker, and bind a popup with the station's name.
-//     var bikeMarker = L.marker([station.lat, station.lon])
-//       .bindPopup("<h3>" + station.name + "<h3><h3>Capacity: " + station.capacity + "</h3>");
-
-//     // Add the marker to the bikeMarkers array.
-//     bikeMarkers.push(bikeMarker);
-//   }
-
-//   // Create a layer group that's made from the bike markers array, and pass it to the createMap function.
-//   createMap(L.layerGroup(bikeMarkers));
-// }
 
 
-// Perform an API call to the Citi Bike API to get the station information. Call createMarkers when it completes.
+// Perform an API call to get earthquake info. Call createMarkers when it completes.
 d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson").then(function(data){
 
 //function for style
@@ -73,11 +50,11 @@ function style(feature){
 
 //function for color
 function color(depth){
-  if (magnitude>90) return "#375700";
-  else if (magnitude> -10) return "#487000";
-  else if (magnitude>10) return "#5e9400";
-  else if (magnitude>30) return "#7fc700";
-  else if (magnitude>50) return "#a8ff0f";
+  if (depth>90) return "#375700";
+  else if (depth> -10) return "#487000";
+  else if (depth>10) return "#5e9400";
+  else if (depth>30) return "#7fc700";
+  else if (depth>50) return "#a8ff0f";
   else return "#273d00";
 }
 
@@ -136,9 +113,9 @@ legend.onAdd = function (map) {
 
 legend.addTo(map);
 
-d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson").then(function(data){
+d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data){
   L.geoJson(data, {
-    color: "#0800fc"
+    color: "red"
   }).addTo(tectonic_plates);
   tectonic_plates.addTo(map);
 });
